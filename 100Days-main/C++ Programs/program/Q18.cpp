@@ -1,0 +1,1 @@
+// Q.18 Write a C++ program to create a time class. Implement various constructors for time class. A member function should display the object of time in hour : min: sec formatand a member function to add two objects of time class.
