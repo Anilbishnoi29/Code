@@ -1,3 +1,4 @@
+//Q7. Write a C++ program to generate Prime numbers between 1 and 50.
 #include<iostream>
 using namespace std;
 
@@ -20,7 +21,7 @@ public:
                 continue;
             flag = true;
 
-            for (j = 2; j <= i / 2; ++j) {
+            for (j = 2; j <= i / 2; j++) {
                 if (i % j == 0) {
                     flag = false;
                     break;
@@ -29,8 +30,8 @@ public:
             if (flag == true)
                 cout << i << " ";
         }
+        cout << endl;
     }
-
 };
 
 int main() {

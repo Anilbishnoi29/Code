@@ -1,3 +1,5 @@
+
+//Q2.Write a C++ program to find the area and perimeter of a circle and rectangle.
 #include <iostream>
 using namespace std;
 

@@ -1,3 +1,4 @@
+//Q6. Find the length of a string. Compare two strings, Concatenate two strings, Reverse a string, copy a string to another location.
 #include<iostream>
 #include<string>
 using namespace std;

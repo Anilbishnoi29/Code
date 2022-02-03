@@ -1,0 +1,1 @@
+//Q5. Write a C++ program to perform string manipulation.
