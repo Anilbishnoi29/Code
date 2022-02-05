@@ -1,29 +1,27 @@
 // Q.19 Write a C++ program to overload -- operator?
 #include<iostream>
 using namespace std;
-
-class Complex {
+class Number {
 private:
-    int a, b;
+    int a;
 public:
-    void setData( int a, int b ) {
+    void setData( int a ) {
         this->a = a;
-        this->b = b;
     };
-    void showData() {
-        cout << "a : " << this->a << ", b : " << this->b << endl;
-    };
-    Complex operator+( Complex c ) {
-        Complex temp;
-        temp.a = this->a + c.a;
-        temp.b = this->b + c.b;
+    Number operator--() {
+        Number temp;
+        temp.a = --a;
         return temp;
     }
+    void showData() {
+        cout << this->a << endl;
+    };
 };
 int main() {
-    Complex c1, c2, c3;
-    c1.setData( 3, 4 );
-    c2.setData( 5, 6 );
-    c3 = c1 + c2;
-    c3.showData();
+    Number n1, n2;
+    n1.setData( 4 );
+    n1.showData();
+    n2 = --n1;
+    n2.showData();
+    return 0;
 }
