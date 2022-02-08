@@ -8,123 +8,130 @@ using namespace std;
 class Account {
 private:
     string accountHolderName;
-    long accountNumber;
+    int accountNumber;
     double accountBalance;
 public:
-    void setAccoutnDetails( string name, long number, double balance ) {
-        this->accountHolderName = name;
-        this->accountNumber = number;
+    // set data
+    void setAccount( string acName, int acNo, double balance ) {
+        this->accountHolderName = acName;
+        this->accountNumber = acNo;
         this->accountBalance = balance;
     };
+    // get balance
     double getBalance() {
         return this->accountBalance;
-    }
+    };
+    // deposit amount
     double depositAmount( double amount ) {
         return this->accountBalance += amount;
     };
-    double withdrawAmount( double amount ) {
-        return this->accountBalance -= amount;
+    // withdraw amount
+    void withdrawAmount( double amount ) {
+        if (this->accountBalance >= amount) {
+            this->accountBalance -= amount;
+            cout << "Your Remaining Balance is " << this->accountBalance << endl;
+        }
+        else {
+            cout << "Insufficient Balance " << endl;
+        }
     };
-    void transferAmount( Account& A, Account& B, double amount ) {
-        A.accountBalance = A.accountBalance - amount;
-        B.accountBalance = B.accountBalance + amount;
-    };
-    // operations
-    friend void operationOnAccount( Account A, Account B );
-};
-// helper functions
-void operationOnAccount( Account A, Account B ) {
-
-    bool flag = true;
-    while (flag) {
-        int operationChoice;
-        cout << "1. To Deposit amount " << endl
-            << "2. To Withdraw amount" << endl
-            << "3. To Transfer amount from one A / c to another" << endl
-            << "4. balance" << endl
-            << "5. To Exit" << endl;
-        cin >> operationChoice;
-        switch (operationChoice) {
-            case 1:
-                double amountForDeposit;
-                cout << "Enter the amount for deposit" << endl;
-                cin >> amountForDeposit;
-                cout << "Your new balance is : " << A.depositAmount( amountForDeposit ) << endl;
-                break;
-            case 2:
-                double amountForWithdraw;
-                cout << "Enter the amount for withdraw" << endl;
-                cin >> amountForWithdraw;
-                cout << "Your remaining balance is : " << A.withdrawAmount( amountForWithdraw ) << endl;
-                break;
-            case 3:
-                double amountForTransfer;
-                cout << "Enter the amount for transfer" << endl;
-                cin >> amountForTransfer;
-                // cout << "Your remaining balance is : " << A.transferAmount( A, B, amountForTransfer ) << endl;
-                A.transferAmount( A, B, amountForTransfer );
-                break;
-            case 4:
-                cout << "Your new balance is : " << A.getBalance() << endl;
-                break;
-            case 5:
-                if (operationChoice == 5) {
-                    flag = false;
-                }
-                cout << "Thank You!" << endl;
-                break;
-            default:cout << "Invailed input" << endl;
-                break;
-        };
+    // transfer amount
+    void transferAmount( Account& b, double amount ) {
+        if (this->accountBalance >= amount) {
+            this->accountBalance -= amount;
+            cout << "Your Remaining Balance is " << this->accountBalance << endl;
+            b.accountBalance += amount;
+        }
+        else {
+            cout << "Insufficient Balance " << endl;
+        }
     };
 };
+// set data
 string setAccountName() {
     string acName;
     cout << "Enter your name : " << endl;
     getline( cin >> ws, acName );
     cin.clear();
     return acName;
-}
+};
 long setAccountNumber() {
     long acNumber;
     cout << "Enter your account number : " << endl;
     cin >> acNumber;
     cin.clear();
     return acNumber;
-}
+};
 double setAccountBalance() {
     double acBalance;
     cout << "Enter your balance : " << endl;
     cin >> acBalance;
     cin.clear();
     return acBalance;
-}
+};
+// ATM
+void atm( Account& a, Account& b ) {
+    bool innerActivity = true;
+    while (innerActivity) {
+        int operations;
+        cout << "Enter 1 : check balance" << endl << "Enter 2 : deposit amount" << endl
+            << "Enter 3 : withdraw amount" << endl << "Enter 4 : transfer amount" << endl
+            << "Enter 5 : Exit" << endl;
+        cin >> operations;
 
-int main() {
-    Account a1;
-    a1.setAccoutnDetails( setAccountName(), setAccountNumber(), setAccountBalance() );
-    Account a2;
-    a2.setAccoutnDetails( setAccountName(), setAccountNumber(), setAccountBalance() );
-
-    bool isTrue = true;
-    while (isTrue) {
-        int userChoiceAccount;
-        cout << "Enter 1. for Account-1, " << endl << "Enter 2. for Account-2" << endl << "Enter 3. for Exit" << endl;
-        cin >> userChoiceAccount;
-        switch (userChoiceAccount) {
+        switch (operations) {
             case 1:
-                operationOnAccount( a1, a2 );
+                cout << "Your Balance is " << a.getBalance() << endl;
                 break;
             case 2:
-                operationOnAccount( a2, a1 );
+                double depositAmount;
+                cout << "Enter amount for deposit" << endl;
+                cin >> depositAmount;
+                cout << "Your New Balance is " << a.depositAmount( depositAmount ) << endl;
                 break;
             case 3:
-                if (userChoiceAccount == 3) {
-                    isTrue = false;
-                }
-                cout << "Thank you!" << endl;
+                double withdrawAmount;
+                cout << "Enter amount for withdraw" << endl;
+                cin >> withdrawAmount;
+                a.withdrawAmount( withdrawAmount );
                 break;
-            default:cout << "Invailed input" << endl;
+            case 4:
+                double transferAmount;
+                cout << "Enter amount for transfer" << endl;
+                cin >> transferAmount;
+                a.transferAmount( b, transferAmount );
+                break;
+            case 5:
+                innerActivity = false;
+                break;
+        }
+    }
+}
+int main() {
+    Account a, b;
+    cout << "Enter data for account-1" << endl;
+    a.setAccount( setAccountName(), setAccountNumber(), setAccountBalance() );
+    cout << "Enter data for account-2" << endl;
+    b.setAccount( setAccountName(), setAccountNumber(), setAccountBalance() );
+
+    int userChoice;
+    bool flag = true;
+    while (flag) {
+        cout << endl;
+        cout << "1 : for account-1" << endl << "2 : for account-2" << endl << "3 : for Exit" << endl;
+        cin >> userChoice;
+        if (userChoice == 1) {
+            atm( a, b );
+        }
+        else if (userChoice == 2) {
+            atm( b, a );
+        }
+        else if (userChoice == 3) {
+            flag = false;
+            cout << "Thank you!" << endl;
+        }
+        else {
+            cout << "invailed input" << endl;
         }
     }
     return 0;
