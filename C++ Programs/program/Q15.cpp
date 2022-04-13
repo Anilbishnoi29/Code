@@ -1,13 +1,11 @@
-//Q15. Write a C++ program to manipulate the class account using classesand function.A user should be able to perform the following functions.a.Deposit money.b.Withdraw money, c.Calculate the interest d.Check the total balance in his account.
+//Q15. Write a C++ program to manipulate the class account using classes and function.A user should be able to perform the following functions. a.Deposit money.b.Withdraw money, c.Calculate the interest d.Check the total balance in his account.
 #include<iostream>
 using namespace std;
-
 class Account {
 private:
     string userName;
     int userAccountNumber;
     double userBalance = 50000;
-
 public:
     Account( int acNo, string acName ) {
         this->userAccountNumber = acNo;
@@ -17,7 +15,6 @@ public:
         cout << "Account Balance : " << this->userBalance << endl;
         cout << "============================================" << endl;
     };
-
     // get user name
     string getUserName() {
         return this->userName;
@@ -88,9 +85,7 @@ int main() {
                 cout << "Hello! " << ac.getUserName() << ", Your total interest is " << ac.getInterestAmount( time ) << endl;cout << endl;
                 break;
             case 5:
-                if (userChoice == 5) {
-                    flag = false;
-                }
+                if (userChoice == 5) { flag = false; }
                 cout << "Hello! " << "Thank you! " << ac.getUserName() << endl;
                 cout << endl;
                 break;

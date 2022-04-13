@@ -2,11 +2,9 @@
 
 #include <iostream>
 using namespace std;
-
 class AverageMarks {
 private:
 	double a, b, c;
-
 public:
 	AverageMarks( double a, double b, double c ) {
 		this->a = a;
@@ -18,20 +16,11 @@ public:
 		return total / 3;
 	};
 };
-
 int main() {
-	// get marks
 	double marks1, marks2, marks3;
-	cout << "Enter marks of Ist subject : ";
-	cin >> marks1;
-	cout << "Enter marks of IIst subject : ";
-	cin >> marks2;
-	cout << "Enter marks of IIIst subject : ";
-	cin >> marks3;
-
-	// Obj of AverageMarks
+	cout << "Enter marks of three subjects : " << endl;
+	cin >> marks1 >> marks2 >> marks3;
 	AverageMarks MyAvgMarks( marks1, marks2, marks3 );
-
 	cout << "Average marks : " << MyAvgMarks.avgMarks() << endl;
 	return 0;
 }

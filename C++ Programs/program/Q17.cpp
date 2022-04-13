@@ -4,7 +4,6 @@
 // 3. To Transfer amount from one A / c to another.
 #include<iostream>
 using namespace std;
-
 class Account {
 private:
     string accountHolderName;
@@ -33,6 +32,42 @@ public:
         }
         else {
             cout << "Insufficient Balance " << endl;
+        }
+    };// ATM
+    void atm( Account& a, Account& b ) {
+        bool innerActivity = true;
+        while (innerActivity) {
+            int operations;
+            cout << "Enter 1 : check balance" << endl << "Enter 2 : deposit amount" << endl
+                << "Enter 3 : withdraw amount" << endl << "Enter 4 : transfer amount" << endl
+                << "Enter 5 : Exit" << endl;
+            cin >> operations;
+            switch (operations) {
+                case 1:
+                    cout << "Your Balance is " << a.getBalance() << endl;
+                    break;
+                case 2:
+                    double depositAmount;
+                    cout << "Enter amount for deposit" << endl;
+                    cin >> depositAmount;
+                    cout << "Your New Balance is " << a.depositAmount( depositAmount ) << endl;
+                    break;
+                case 3:
+                    double withdrawAmount;
+                    cout << "Enter amount for withdraw" << endl;
+                    cin >> withdrawAmount;
+                    a.withdrawAmount( withdrawAmount );
+                    break;
+                case 4:
+                    double transferAmount;
+                    cout << "Enter amount for transfer" << endl;
+                    cin >> transferAmount;
+                    a.transferAmount( b, transferAmount );
+                    break;
+                case 5:
+                    innerActivity = false;
+                    break;
+            }
         }
     };
     // transfer amount
@@ -69,44 +104,7 @@ double setAccountBalance() {
     cin.clear();
     return acBalance;
 };
-// ATM
-void atm( Account& a, Account& b ) {
-    bool innerActivity = true;
-    while (innerActivity) {
-        int operations;
-        cout << "Enter 1 : check balance" << endl << "Enter 2 : deposit amount" << endl
-            << "Enter 3 : withdraw amount" << endl << "Enter 4 : transfer amount" << endl
-            << "Enter 5 : Exit" << endl;
-        cin >> operations;
 
-        switch (operations) {
-            case 1:
-                cout << "Your Balance is " << a.getBalance() << endl;
-                break;
-            case 2:
-                double depositAmount;
-                cout << "Enter amount for deposit" << endl;
-                cin >> depositAmount;
-                cout << "Your New Balance is " << a.depositAmount( depositAmount ) << endl;
-                break;
-            case 3:
-                double withdrawAmount;
-                cout << "Enter amount for withdraw" << endl;
-                cin >> withdrawAmount;
-                a.withdrawAmount( withdrawAmount );
-                break;
-            case 4:
-                double transferAmount;
-                cout << "Enter amount for transfer" << endl;
-                cin >> transferAmount;
-                a.transferAmount( b, transferAmount );
-                break;
-            case 5:
-                innerActivity = false;
-                break;
-        }
-    }
-}
 int main() {
     Account a, b;
     cout << "Enter data for account-1" << endl;
@@ -121,10 +119,10 @@ int main() {
         cout << "1 : for account-1" << endl << "2 : for account-2" << endl << "3 : for Exit" << endl;
         cin >> userChoice;
         if (userChoice == 1) {
-            atm( a, b );
+            a.atm( a, b );
         }
         else if (userChoice == 2) {
-            atm( b, a );
+            b.atm( b, a );
         }
         else if (userChoice == 3) {
             flag = false;

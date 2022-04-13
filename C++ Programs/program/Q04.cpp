@@ -1,20 +1,13 @@
 //Q4.Write a C++ program to generate Fibonacci series.
 #include<iostream>
 using namespace std;
-
 class FibonacciSeries {
-private:
-    int maxNum;
 public:
-    FibonacciSeries( int a ) {
-        this->maxNum = a;
-    }
-
-    void fibSeries() {
+    void fibSeries( int a ) {
         int fib1 = 0, fib2 = 1, fib3;
-        if (maxNum < 1)return;
+        if (a < 1)return;
         cout << fib1 << endl;
-        for (int i = 0;i < maxNum;i++) {
+        for (int i = 0;i < a;i++) {
             cout << fib2 << endl;
             fib3 = fib1 + fib2;
             fib1 = fib2;
@@ -26,8 +19,7 @@ int main() {
     int getNum;
     cout << "Enter the number for ";
     cin >> getNum;
-
-    FibonacciSeries Fib( getNum );
-    Fib.fibSeries();
+    FibonacciSeries Fib;
+    Fib.fibSeries( getNum );
     return 0;
 }

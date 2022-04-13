@@ -1,32 +1,18 @@
 //Q3. Write a C++ program to swap two numbers.
 #include<iostream>
+// #include <bits/stdc++.h>
 using namespace std;
-
-class SwipNumber {
-private:
-    int a, b;
-public:
-    SwipNumber( int a, int b ) {
-        this->a = a;
-        this->b = b;
-    }
-    void swipNum() {
-        cout << "number is : " << a << " , " << b << endl;
-        a = a + b;
-        b = a - b;
-        a = a - b;
-        cout << "swiped number is : " << a << " , " << b << endl;
-    }
+void swap_numbers( int& x, int& y ) {
+    int t;
+    t = x;
+    x = y;
+    y = t;
 };
 int main() {
     int a, b;
-    cout << "Enter number-1 : ";
-    cin >> a;
-    cout << "Enter number-2 : ";
-    cin >> b;
-
-    SwipNumber SwipN( a, b );
-    SwipN.swipNum();
-
+    cout << "Enter two number : ";
+    cin >> a >> b;
+    swap_numbers( a, b );
+    cout << "a : " << a << " b : " << b << endl;
     return 0;
 }

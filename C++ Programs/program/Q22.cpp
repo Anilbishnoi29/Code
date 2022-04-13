@@ -2,7 +2,6 @@
 #include<string.h>
 #include<iostream>
 using namespace std;
-
 class AddStr {
 private:
     string a;
@@ -12,12 +11,8 @@ public:
         this->a = s1;
         this->b = s2;
     };
-    void operator+() {
-        cout << "concatenation: " << a + b << endl;
-    };
-    void showData() {
-        cout << this->a << this->b;
-    };
+    void operator+() { cout << "concatenation: " << a + b << endl; };
+    void showData() { cout << this->a << this->b; };
 };
 int main() {
     AddStr s1;

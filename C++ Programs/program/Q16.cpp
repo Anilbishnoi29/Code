@@ -25,16 +25,10 @@ public:
     }
 };
 int main() {
-
-    Distance pointA;
+    Distance pointA, pointB, pointC;
     pointA.setDistance();
-
-    Distance pointB;
     pointB.setDistance();
-
-    Distance pointC;
     pointC.addDistance( pointA, pointB );
     pointC.getDistance();
-
     return 0;
 }
